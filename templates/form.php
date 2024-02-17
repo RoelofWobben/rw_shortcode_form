@@ -1,6 +1,6 @@
-<?php  $atts = array_replace([...], $args['atts']); ?>
+<?php  $atts = array_replace(["subject" =>  "", "email" => "" , "message" => ""], $args['atts']); ?>
 
-<div class="container">
+<div class="<?php echo $atts['class'] ?>" data-shortcode="<?php echo $args['shortcode_tag'] ?>">
             <form action="#" method="post">
                 <h1>Contact Form</h1>
                 <?php wp_nonce_field( 'submit_contact_form', 'contact_form_nonce' ); ?>

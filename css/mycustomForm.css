@@ -30,7 +30,7 @@ h1 {
   margin: 0 0 2em;
 }
 
-.container {
+[data-shortcode="contact_form"] {
   position: relative;
   max-width: 40rem;
   margin: 5rem auto;
@@ -39,7 +39,7 @@ h1 {
   padding: 3rem 5rem 0;
   border-radius: 1px;
 }
-.container::before {
+[data-shortcode="contact_form"]::before {
   content: '';
   position: absolute;
   top: 0;
@@ -55,7 +55,7 @@ h1 {
   transition: transform 0.28s ease-in-out, -webkit-transform 0.28s ease-in-out;
   z-index: -1;
 }
-.container:hover::before {
+[data-shortcode="contact_form"]:hover::before {
   -webkit-transform: scale(1);
           transform: scale(1);
 }
