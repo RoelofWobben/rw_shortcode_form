@@ -1,27 +1,22 @@
-<form method="post" action="" >
-    <div id="response_div">
-
-    </div>
-    <div class="ideapro_form">
-        <label for="your_name">Your Name</label>
-        <input type="text" name="your_name" id="your_name" placeholder="Your Full Name" />
-
-        <label for="your_email">Your Email Address</label>
-        <input type="email" name="your_email" id="your_email" placeholder="Enter Your Email Address" />
-
-        <label for="phone_number">Phone Number</label>
-        <input type="text" name="phone_number" id="phone_number" placeholder="Your Phone Number" />
-
-        <label for="your_comments">Questions or Comments</label>
-        <textarea name="your_comments" id="your_comments" placeholder="Say something nice"></textarea>
-
-        <br />
-        <br />
-        
-        <input type="submit" name="ideapro_contact_submit" id="ideapro_contact_submit" onclick="submit_contact_form()" value="SUBMIT YOUR INFORMATION" />';
-
-    </div>
-
-</form>
-
-
+<div class="container">
+            <form action="#" method="post">
+                <h1>Contact Form</h1>
+                <?php wp_nonce_field( 'submit_contact_form', 'contact_form_nonce' ); ?>
+                <div class="form-group">
+                    <input type="text" required />
+                    <label for="input" class="control-label">Subject</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" required />
+                    <label for="input" class="control-label">Email</label>
+                </div>
+                <div class="form-group">
+                    <textarea required></textarea>
+                    <label for="textarea" class="control-label">Message</label>
+                </div>
+                <div class="button-container">
+                    <button class="button"><span>Submit</span></button>
+                </div>
+ 
+            </form>
+        </div>

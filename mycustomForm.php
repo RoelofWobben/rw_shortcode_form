@@ -7,7 +7,7 @@
 function roelof_add_custom_shortcode() {
 	function roelof_contact_form() {
 	  ob_start();
-	  load_template(__FILE__ . '/templates/form.php', false, func_get_args());
+	  load_template(__DIR__ . '/templates/form.php', false, func_get_args());
 	  return ob_end_flush();
 	}
   
@@ -15,4 +15,17 @@ function roelof_add_custom_shortcode() {
   }
 
 add_action('init', 'roelof_add_custom_shortcode');
+
+function load_assets() {
+	wp_enqueue_style(
+		'mycustomForm',
+		plugin_dir_url(__FILE__) . '/css/mycustomForm.css',
+		array(),
+		1,
+		'all'
+	);
+
+}
+
+add_action('wp_enqueue_scripts', 'load_assets');
 
