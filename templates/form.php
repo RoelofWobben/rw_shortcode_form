@@ -1,3 +1,5 @@
+<?php  $atts = array_replace([...], $args['atts']); ?>
+
 <div class="container">
             <form action="#" method="post">
                 <h1>Contact Form</h1>

@@ -5,9 +5,13 @@
 **/
 
 function roelof_add_custom_shortcode() {
-	function roelof_contact_form() {
+	function roelof_contact_form($atts, $content, $shortcode_tag) {
 	  ob_start();
-	  load_template(__DIR__ . '/templates/form.php', false, func_get_args());
+	  load_template(__DIR__ . '/templates/form.php', false, [
+		'atts' => $atts,
+		'content' => $content,
+		'shortcode_tag' => $shortcode_tag,
+	  ]);
 	  return ob_end_flush();
 	}
   
