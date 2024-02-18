@@ -2,7 +2,6 @@
 
 <div class="<?php echo esc_attr($atts['class']) ?>" data-shortcode="<?php echo esc_attr($args['shortcode_tag']) ?>">
             <form action="#" method="post">
-                <h1>Contact Form</h1>
                 <?php wp_nonce_field( 'submit_contact_form', 'contact_form_nonce' ); ?>
                 <div class="form-group">
                     <input type="text" required value="<?php echo esc_attr($atts['subject']) ?> " />
@@ -13,7 +12,7 @@
                     <label for="input" class="control-label" value="<?php echo esc_attr($atts['email']) ?> " >Email</label>
                 </div>
                 <div class="form-group">
-                    <textarea required value="<?php echo esc_attr($atts['messsage']) ?> " ></textarea>
+                    <textarea required value="<?php echo esc_attr($atts['message']) ?>"> </textarea>
                     <label for="textarea" class="control-label">Message</label>
                 </div>
                 <div class="button-container">
