@@ -25,13 +25,8 @@ add_action('init', 'roelof_add_custom_shortcode');
 
 function load_assets()
 {
-	wp_enqueue_style(
-		'mycustomForm',
-		plugin_dir_url(__FILE__) . '/css/mycustomForm.css',
-		array(),
-		1,
-		'all'
-	);
+
+	wp_register_style( 'get-style', plugins_url( '/css/mycustomForm.css', __FILE__ ), array(), '1.0.0', 'all' );
 }
 
 add_action('wp_enqueue_scripts', 'load_assets');
