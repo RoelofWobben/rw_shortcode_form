@@ -19,7 +19,7 @@
             <label for="<?php echo $shortcode ?>_message" class="control-label"><?php esc_html_e("Message", "mycustomForm") ?></label>
         </div>
         <div class="button-container">
-            <button class="button"><span>Submit</span></button><?php esc_html_e("Subject", "mycustomForm") ?>
+            <button class="button"><span><?php esc_html_e("Submit", "mycustomForm") ?></span></button>
         </div>
 
     </form>
