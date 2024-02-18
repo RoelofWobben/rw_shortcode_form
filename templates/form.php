@@ -1,7 +1,7 @@
 <?php
 $atts = array_replace(["class" => "", "subject" =>  "", "email" => "", "message" => ""], $args['atts']);
 $shortcode =  esc_attr($args['shortcode_tag']);
-wp_enqueue_style( 'get-style' );
+wp_enqueue_style( 'rw-custom-form-style' );
 ?>
 
 <div class="<?= esc_attr($atts['class']) ?>" data-shortcode="<?= esc_attr($args['shortcode_tag']) ?>">
