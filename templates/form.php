@@ -1,26 +1,29 @@
 <?php
 $atts = array_replace(["class" => "", "subject" =>  "", "email" => "", "message" => ""], $args['atts']);
-$shortcode =  esc_attr($args['shortcode_tag']);
-wp_enqueue_style( 'rw-custom-form-style' );
+$prefix =  esc_attr($args['prefix']);
+$shortcode = esc_attr($args['shortcode'])
 ?>
 
-<div class="<?= esc_attr($atts['class']) ?>" data-shortcode="<?= esc_attr($args['shortcode_tag']) ?>">
-	<form action="#" method="post">
+<div class="<?= esc_attr($atts['class']) ?>" data-shortcode="<?= esc_attr($args['shortcode']) ?>">
+   <div class="user_feedback">
+
+   </div>
+	<form action="#" method="post" >
 		<?php wp_nonce_field('submit_contact_form', 'contact_form_nonce'); ?>
 		<div class="form-group">
-			<input id="<?= $shortcode ?>_input" type="text" required value="<?= esc_attr($atts['subject']) ?> " />
-			<label for="<?= $shortcode ?>_input" class="control-label"><?php esc_html_e("Subject", "mycustomForm") ?></label>
+			<input id="<?= $prefix ?>_subject" name="subject" type="text" required value="<?= esc_attr($atts['subject']) ?> " />
+			<label for="<?= $prefix ?>_subject" class="control-label"><?php esc_html_e("Subject", "mycustomForm") ?></label>
 		</div>
 		<div class="form-group">
-			<input id="<?= $shortcode ?>_email" type="text" required value="<?= esc_attr($atts['email']) ?> " />
-			<label for="<?= $shortcode ?>_email" class="control-label"><?php esc_html_e("Email", "mycustomForm") ?></label>
+			<input id="<?= $prefix ?>_email" type="text" required value="<?= esc_attr($atts['email']) ?> " />
+			<label for="<?= $prefix ?>_email" class="control-label"><?php esc_html_e("Email", "mycustomForm") ?></label>
 		</div>
 		<div class="form-group">
-			<textarea id="<?= $shortcode ?>_message" required value="<?= esc_attr($atts['message']) ?>"> </textarea>
-			<label for="<?= $shortcode ?>_message" class="control-label"><?php esc_html_e("Message", "mycustomForm") ?></label>
+			<textarea id="<?= $prefix ?>_message" required value="<?= esc_attr($atts['message']) ?>"> </textarea>
+			<label for="<?= $prefix ?>_message" class="control-label"><?php esc_html_e("Message", "mycustomForm") ?></label>
 		</div>
 		<div class="button-container">
-			<button class="button"><span><?php esc_html_e("Submit", "mycustomForm") ?></span></button>
+			<button type="submit" class="button"><span><?php esc_html_e("Submit", "mycustomForm") ?></span></button>
 		</div>
 
 	</form>

@@ -1,36 +1,50 @@
-function submit_contact_form()
-{
-	var fd = new FormData();
-	fd.append('ideaproContactSubmit','1');
-	fd.append('name',$("#your_name").val());
-	fd.append('email',$("#your_email").val());
-	fd.append('phone',$("#phone_number").val());
-	fd.append('comments',$("#your_comments").val());
-	js_submit(fd,submit_contact_form_callback);
+var all_forms = document.querySelectorAll('[data-shortcode="contact_form"] > form');
 
+all_forms.forEach((form) => {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-}
+        // array that holds all the validation errors 
 
-function submit_contact_form_callback(data)
-{
-	var jdata = JSON.parse(data);
+        var error_messages = [];
 
-	if(jdata.success == 1)
-	{
-		var mess = jdata.message;
+        // find the subject field of the form 
 
-		$("#response_div").html(mess);
-		$("#response_div").css("background-color","green");
-		$("#response_div").css("color","#FFFFFF");
-		$("#response_div").css("padding","20px");
-	}
+        var subject = form.subject.value;
 
-}
+        if (subject.length < 3) {
+            error_messages.push('Subject has to be more then 3 characters');
+        }
 
-function js_submit(fd,callback)
-{
-	var submitUrl = 'https://www.ideapro.io/wp-content/plugins/ideapro-contact-form-ajax/process/';
+        // show the error messages
 
-	$.ajax({url: submitUrl,type:'post',data:fd,contentType:false,processData:false,success:function(response){ callback(response); },});
+        // Select the user-feedback div
+        const userFeedbackDiv = document.querySelector('.user_feedback');
 
-}
+        // Create a new div to hold the error messages
+        const errorDiv = document.createElement('div');
+        errorDiv.id = 'error';
+
+        // Append the error div to the user-feedback div
+        userFeedbackDiv.appendChild(errorDiv);
+
+        // Select the error div
+        const errorDivElement = document.getElementById('error');
+
+        // Clear any existing content in the error div
+        errorDivElement.innerHTML = '';
+
+        // Loop through the error messages array and create HTML elements for each message
+        error_messages.forEach(errorMessage => {
+            // Create a new <p> element
+            const errorParagraph = document.createElement('p');
+
+            // Set the text content of the <p> element to the current error message
+            errorParagraph.textContent = errorMessage;
+
+            // Append the <p> element to the error div
+            errorDivElement.appendChild(errorParagraph);
+        });
+    })
+})
+
