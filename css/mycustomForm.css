@@ -411,3 +411,11 @@ fieldset {
 .button:focus {
   outline: none;
 }
+
+.error {
+  background-color: rgb(254 226 226);;
+  color: rgb(153 27 27);
+  padding-left: 20px; 
+  border-radius: 20px;  
+}
+

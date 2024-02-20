@@ -11,10 +11,26 @@ all_forms.forEach((form) => {
         // find the subject field of the form 
 
         var subject = form.subject.value;
+        var email = form.email.value;
+        var message = form.message.value;  
+
 
         if (subject.length < 3) {
             error_messages.push('Subject has to be more then 3 characters');
         }
+
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+        if (!email.match(validRegex)) {
+            error_messages.push('Please input a valid email adress'); 
+        }
+
+        if (message.length < 2) {
+
+            error_messages.push('Message has to be more then 2 characters'); 
+        }
+
+
 
         // show the error messages
 
@@ -23,13 +39,13 @@ all_forms.forEach((form) => {
 
         // Create a new div to hold the error messages
         const errorDiv = document.createElement('div');
-        errorDiv.id = 'error';
+        errorDiv.classList.add('error');
 
         // Append the error div to the user-feedback div
         userFeedbackDiv.appendChild(errorDiv);
 
         // Select the error div
-        const errorDivElement = document.getElementById('error');
+        const errorDivElement = document.querySelector('.error');
 
         // Clear any existing content in the error div
         errorDivElement.innerHTML = '';
