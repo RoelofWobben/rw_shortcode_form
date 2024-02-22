@@ -6,11 +6,10 @@ $shortcode = esc_attr($args['shortcode'])
 
 <div class="<?= esc_attr($atts['class']) ?>" data-shortcode="<?= esc_attr($args['shortcode']) ?>">
    
-	<form action="#" method="post" >
+	<form method="post" action="<?php echo plugin_dir_url(__DIR__) . 'submit.php' ?>">
 	<div class="user_feedback">
 
        </div>
-		<?php wp_nonce_field('submit_contact_form', 'contact_form_nonce'); ?>
 		<div class="form-group">
 			<input id="<?= $prefix ?>_subject" name="subject" type="text" required value="<?= esc_attr($atts['subject']) ?> " />
 			<label for="<?= $prefix ?>_subject" class="control-label"><?php esc_html_e("Subject", "mycustomForm") ?></label>

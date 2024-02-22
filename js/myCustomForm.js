@@ -33,6 +33,19 @@ function showErrorMessages(messages, form) {
 }
 
 
+async function send_to_backend(data, form) {
+    console.log(form.action); 
+    var data = await fetch( form.action, {
+        method: 'POST', 
+        body: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },
+    })
+    var response = await data;
+    console.log(response); 
+}
+
 all_forms.forEach((form) => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -43,11 +56,15 @@ all_forms.forEach((form) => {
 
         var error_messages = [];
 
+        var formdata = new FormData(form);
+
+        formdata.get(subject);
+
         // find the subject field of the form 
 
-        var subject = form.subject.value;
-        var email = form.email.value;
-        var message = form.message.value;  
+        var subject = formdata.get("subject");
+        var email = formdata.get("email"); 
+        var message = formdata.get("message");   
 
 
         if (subject.length < 3) {
@@ -66,13 +83,16 @@ all_forms.forEach((form) => {
         }
 
         if (error_messages.length) {
-            showErrorMessages(error_messages, form);
-            return
-        } 
+             showErrorMessages(error_messages, form);
+           return
+        }
 
-
-
+         
         
+        var backend_response = send_to_backend(formdata, form); 
+
+        console.log(backend_response); 
+
     })
 })
 
