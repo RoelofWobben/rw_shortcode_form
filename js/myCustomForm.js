@@ -33,19 +33,15 @@ function showErrorMessages(messages, form) {
 }
 
 
-async function send_to_backend(data, form) {
-    console.log(form.action); 
-    var data = await fetch( form.action, {
+async function send_to_backend(data, url) {
+    var data = await fetch( url, {
         method: 'POST', 
-        body: data,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-          },
+        body: data
     })
     var response = await data;
     console.log(response); 
 }
-
+S
 all_forms.forEach((form) => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -89,7 +85,7 @@ all_forms.forEach((form) => {
 
          
         
-        var backend_response = send_to_backend(formdata, form); 
+        var backend_response = send_to_backend(formdata, form.action); 
 
         console.log(backend_response); 
 
