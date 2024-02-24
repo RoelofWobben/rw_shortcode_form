@@ -3,7 +3,7 @@
 $path = preg_replace('/wp-content.*$/', '', __DIR__);
 require_once($path . "wp-load.php");
 
-$data = array_replace(["subject" =>  "", "email" => "", "message" => "", "nonce" => ""], $_POST);
+$data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], $_POST);
 
 $errors = new WP_Error();
 
@@ -19,11 +19,25 @@ if (mb_strlen($data['message']) < 2) {
     $errors->add('Error', "message has to be more then 2 characters");
 }
 
-if (!wp_verify_nonce($data['nonce'], 'submit_contact_form')) {
+if (!wp_verify_nonce($data['_wpnonce'], 'submit_contact_form')) {
     $errors->add('Error', 'Form is messed up');
 }
 
 if ($errors->has_errors()) {
     wp_send_json_error($errors);
+}
+
+ob_start(); 
+load_template(__DIR__ . '/templates/email.php', false, [
+    'data' => $data
+]); 
+$template = ob_get_clean(); 
+
+$headers = array('Content-Type: text/html; charset=UTF-8');
+$mail_send = wp_mail(get_option( 'admin_email' ), $data['email'],$template, $headers);
+
+
+if (!$mail_send) {
+    wp_send_json(["Error", "Mail cannot be send"]); 
 }
 
