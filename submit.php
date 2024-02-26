@@ -12,8 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
 
-var_dump($data); 
-
 $errors = new WP_Error();
 
 if (mb_strlen($data['subject']) < 2) {

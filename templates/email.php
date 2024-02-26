@@ -2,8 +2,6 @@
 
 if(!defined('ABSPATH')) die();
 
-var_dump($args); 
-
 $data = array_replace(["class" => "", "subject" =>  "", "email" => "", "message" => ""], $args['data']);
 
 ?>
