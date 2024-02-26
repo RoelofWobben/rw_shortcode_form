@@ -34,13 +34,14 @@ if ($errors->has_errors()) {
     wp_send_json_error($errors);
 }
 
-// $headers = array('Content-Type: text/html; charset=UTF-8');
+$headers = array('Content-Type: text/html; charset=UTF-8');
 $mail_send = wp_mail(get_option( 'admin_email' ), $data['email'],load_template(__DIR__ . '/templates/email.php', false, [
     'data' => $data
  ]), $headers);
 
 
 if (!$mail_send) {
-    wp_send_json(["Error", "Mail cannot be send"]); 
+    wp_send_json(new WP_Error("Error", "Mail cannot be send")); 
 }
 
+wp_send_json(new WP_Error(200, "Mail is send")); 

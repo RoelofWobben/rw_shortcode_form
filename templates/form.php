@@ -20,7 +20,7 @@ $shortcode = esc_attr($args['shortcode'])
 			<label for="<?= $prefix ?>_email" class="control-label"><?php esc_html_e("Email", "mycustomForm") ?></label>
 		</div>
 		<div class="form-group">
-			<textarea id="<?= $prefix ?>_message" name ="message" required value="<?= esc_attr($atts['message']) ?>"> </textarea>
+		    <textarea id="<?= $prefix ?>_message" name="message" required><?= esc_attr($atts['message']) ?></textarea>
 			<label for="<?= $prefix ?>_message" class="control-label"><?php esc_html_e("Message", "mycustomForm") ?></label>
 		</div>
 		<div class="button-container">
