@@ -39,7 +39,7 @@ async function send_to_backend(data, url) {
         body: data
     })
     var data = await response.json(); 
-    console.log(data); 
+    await console.log(data); 
 }
 
 all_forms.forEach((form) => {
