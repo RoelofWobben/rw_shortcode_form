@@ -22,7 +22,7 @@ function roelof_add_custom_shortcode()
 			'shortcode' => $shortcode_tag, 
 			'prefix' => $shortcode_tag . $counter,
 		]);
-		return ob_end_flush();
+		return ob_get_clean();
 	}
 
 	add_shortcode('contact_form', 'roelof_contact_form');
