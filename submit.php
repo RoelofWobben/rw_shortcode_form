@@ -38,7 +38,7 @@ if ($errors->has_errors()) {
 
 $headers = array('Content-Type: text/html; charset=UTF-8');
 $mail_send = wp_mail(get_option( 'admin_email' ), $data['email'],load_template(__DIR__ . '/templates/email.php', false, [
-    ' data' => $data
+    'data' => $data
  ]), $headers);
 
 

@@ -12,11 +12,11 @@ $shortcode = esc_attr($args['shortcode'])
 
        </div>
 		<div class="form-group">
-			<input id="<?= $prefix ?>_subject" name="subject" type="text" required value="<?= esc_attr($atts['subject']) ?> " />
+			<input id="<?= $prefix ?>_subject" name="subject" type="text" required value="<?= esc_attr($atts['subject']) ?>" />
 			<label for="<?= $prefix ?>_subject" class="control-label"><?php esc_html_e("Subject", "mycustomForm") ?></label>
 		</div>
 		<div class="form-group">
-			<input id="<?= $prefix ?>_email" name="email" type="text" required value="<?= esc_attr($atts['email']) ?> " />
+			<input id="<?= $prefix ?>_email" name="email" type="text" required value="<?= esc_attr($atts['email']) ?>" />
 			<label for="<?= $prefix ?>_email" class="control-label"><?php esc_html_e("Email", "mycustomForm") ?></label>
 		</div>
 		<div class="form-group">
