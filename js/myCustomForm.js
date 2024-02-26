@@ -1,3 +1,6 @@
+console.log('validation is called'); 
+
+
 var all_forms = document.querySelectorAll('[data-shortcode="contact_form"] > form');
 
 function showErrorMessages(messages, form) {
