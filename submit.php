@@ -1,7 +1,14 @@
 <?php
 
+
+
 $path = preg_replace('/wp-content.*$/', '', __DIR__);
 require_once($path . "wp-load.php");
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    $error = new WP_Error(400, "Bad request") ; 
+    wp_send_json_error($error); 
+}
 
 $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
 
@@ -28,14 +35,6 @@ if (!wp_verify_nonce($data['_wpnonce'], 'submit_contact_form')) {
 if ($errors->has_errors()) {
     wp_send_json_error($errors);
 }
-
-// ob_start(); 
-//load_template(__DIR__ . '/templates/email.php', false, [
-//   ' data' => $data
-//]); 
-// $template = ob_get_clean(); 
-
-
 
 $headers = array('Content-Type: text/html; charset=UTF-8');
 $mail_send = wp_mail(get_option( 'admin_email' ), $data['email'],load_template(__DIR__ . '/templates/email.php', false, [

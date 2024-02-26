@@ -34,17 +34,13 @@ function showErrorMessages(messages, form) {
 
 
 async function send_to_backend(data, url) {
-    await fetch( url, {
+    var response = await fetch( url, {
         method: 'POST', 
         body: data
     })
+    var data = await response.json(); 
+    console.log(data); 
 }
-
-async function fetch_from_backend(url) {
-    var data =  await fetch(url); 
-    var response = await data;
-    console.log(response); 
-}; 
 
 all_forms.forEach((form) => {
     form.addEventListener('submit', (e) => {
@@ -86,13 +82,8 @@ all_forms.forEach((form) => {
              showErrorMessages(error_messages, form);
            return
         }
-
-         
         
-        send_to_backend(formdata, form.action); 
-        var backend_response = fetch_from_backend(form.action);
-        console.log(backend_response); 
-
+        var backend_response = send_to_backend(formdata, form.action); 
     })
 })
 
