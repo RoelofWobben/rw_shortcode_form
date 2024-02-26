@@ -5,6 +5,8 @@
  * Description: This form submits through an ajax call
  **/
 
+if(!defined('ABSPATH')) die();
+
 function roelof_add_custom_shortcode()
 {
 	function roelof_contact_form($atts, $content, $shortcode_tag)

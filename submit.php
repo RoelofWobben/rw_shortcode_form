@@ -3,7 +3,9 @@
 $path = preg_replace('/wp-content.*$/', '', __DIR__);
 require_once($path . "wp-load.php");
 
-$data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], $_POST);
+$data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
+
+var_dump($data); 
 
 $errors = new WP_Error();
 
@@ -27,14 +29,18 @@ if ($errors->has_errors()) {
     wp_send_json_error($errors);
 }
 
-ob_start(); 
-load_template(__DIR__ . '/templates/email.php', false, [
-    'data' => $data
-]); 
-$template = ob_get_clean(); 
+// ob_start(); 
+//load_template(__DIR__ . '/templates/email.php', false, [
+//   ' data' => $data
+//]); 
+// $template = ob_get_clean(); 
+
+
 
 $headers = array('Content-Type: text/html; charset=UTF-8');
-$mail_send = wp_mail(get_option( 'admin_email' ), $data['email'],$template, $headers);
+$mail_send = wp_mail(get_option( 'admin_email' ), $data['email'],load_template(__DIR__ . '/templates/email.php', false, [
+    ' data' => $data
+ ]), $headers);
 
 
 if (!$mail_send) {
