@@ -1,36 +1,5 @@
 var all_forms = document.querySelectorAll('[data-shortcode="contact_form"] > form');
 
-function showErrorMessages(messages, form) {
-    // show the error messages
-
-        // Select the user-feedback div
-        const userFeedbackDiv = form.querySelector('.user_feedback');
-
-        // Create a new div to hold the error messages
-        const errorDiv = document.createElement('div');
-        errorDiv.classList.add('error');
-
-        // Append the error div to the user-feedback div
-        userFeedbackDiv.appendChild(errorDiv);
-
-        // Select the error div
-        const errorDivElement = form.querySelector('.error');
-
-        // Clear any existing content in the error div
-        errorDivElement.innerHTML = '';
-
-        // Loop through the error messages array and create HTML elements for each message
-        messages.forEach(message => {
-            // Create a new <p> element
-            const errorParagraph = document.createElement('p');
-
-            // Set the text content of the <p> element to the current error message
-            errorParagraph.textContent = message;
-
-            // Append the <p> element to the error div
-            errorDivElement.appendChild(errorParagraph);
-        });
-}
 
 
 async function send_to_backend(data, url) {
@@ -45,8 +14,38 @@ async function send_to_backend(data, url) {
 all_forms.forEach((form) => {
 
     const userFeedbackDiv = form.querySelector('.user_feedback');
-    userFeedbackDiv.classlist.add('hidden'); 
+    userFeedbackDiv.classlist.add('hidden');
+
+    var showErrorMessages = function showErrorMessages(messages) {
+        // show the error messages
     
+            // Create a new div to hold the error messages
+            const errorDiv = document.createElement('div');
+            errorDiv.classList.add('error');
+    
+            // Append the error div to the user-feedback div
+            userFeedbackDiv.appendChild(errorDiv);
+    
+            // Select the error div
+            const errorDivElement = form.querySelector('.error');
+    
+            // Clear any existing content in the error div
+            errorDivElement.innerHTML = '';
+    
+            // Loop through the error messages array and create HTML elements for each message
+            messages.forEach(message => {
+                // Create a new <p> element
+                const errorParagraph = document.createElement('p');
+    
+                // Set the text content of the <p> element to the current error message
+                errorParagraph.textContent = message;
+    
+                // Append the <p> element to the error div
+                errorDivElement.appendChild(errorParagraph);
+            });
+    }
+    
+   
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -88,7 +87,7 @@ all_forms.forEach((form) => {
         }
 
         if (error_messages.length) {
-             showErrorMessages(error_messages, form);
+             showErrorMessages(error_messages);
              userFeedbackDiv.classList.remove('hidden'); 
              return
         }
