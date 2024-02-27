@@ -43,15 +43,18 @@ async function send_to_backend(data, url) {
 }
 
 all_forms.forEach((form) => {
+
+    const userFeedbackDiv = form.querySelector('.user_feedback');
+    userFeedbackDiv.classlist.add('hidden'); 
+    
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         /**
-         *  @type {Array.<String>}
+         *  @type {HTMLDivElement}
          */
 
-        const userFeedbackDiv = form.querySelector('.user_feedback');
-        userFeedbackDiv.classlist.add('hidden'); 
+        
 
         while (userFeedbackDiv.firstChild) {
             userFeedbackDiv.removeChild(userFeedbackDiv.firstChild); 
