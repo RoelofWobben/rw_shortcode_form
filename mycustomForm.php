@@ -34,7 +34,7 @@ function load_assets()
 {
 
 	wp_register_style( 'rw-custom-form-style', plugins_url( '/css/mycustomForm.css', __FILE__ ), array(), '1.0.0', 'all' );
-	wp_register_script( 'rw-custom-form-script', plugins_url( '/js/myCustomForm.js', __FILE__ ), array(), '1.0.0', 'all' );
+	wp_register_script( 'rw-custom-form-script', plugins_url( '/js/mycustomForm.js', __FILE__ ), array(), '1.0.0', 'all' );
 
 }
 

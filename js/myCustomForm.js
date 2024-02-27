@@ -1,6 +1,3 @@
-console.log('validation is called'); 
-
-
 var all_forms = document.querySelectorAll('[data-shortcode="contact_form"] > form');
 
 function showErrorMessages(messages, form) {
@@ -53,11 +50,16 @@ all_forms.forEach((form) => {
          *  @type {Array.<String>}
          */
 
+        const userFeedbackDiv = form.querySelector('.user_feedback');
+        userFeedbackDiv.classlist.add('hidden'); 
+
+        while (userFeedbackDiv.firstChild) {
+            userFeedbackDiv.removeChild(userFeedbackDiv.firstChild); 
+        } 
+        
         var error_messages = [];
 
         var formdata = new FormData(form);
-
-        formdata.get(subject);
 
         // find the subject field of the form 
 
@@ -67,6 +69,7 @@ all_forms.forEach((form) => {
 
 
         if (subject.length < 3) {
+            console.log("invalid subject"); 
             error_messages.push('Subject has to be more then 3 characters');
         }
 
@@ -83,7 +86,8 @@ all_forms.forEach((form) => {
 
         if (error_messages.length) {
              showErrorMessages(error_messages, form);
-           return
+             userFeedbackDiv.classList.remove('hidden'); 
+             return
         }
         
         var backend_response = send_to_backend(formdata, form.action); 
