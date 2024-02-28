@@ -7,6 +7,7 @@ $shortcode = esc_attr($args['shortcode'])
 <div class="<?= esc_attr($atts['class']) ?>" data-shortcode="<?= esc_attr($args['shortcode']) ?>">
    
 	<form method="post" action="<?php echo plugin_dir_url(__DIR__) . 'submit.php' ?>">
+	<?php wp_nonce_field('submit_contact_form'); ?>
 	<div class="user_feedback hidden">
 
        </div>

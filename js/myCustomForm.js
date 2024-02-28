@@ -12,9 +12,6 @@ async function send_to_backend(data, url) {
         body: data
     })
     var data = await response.json();
-    if (typeof(data) == 'object') {
-        
-    }
 }
 
 /**
@@ -43,14 +40,17 @@ all_forms.forEach((form) => {
     * Function to show error messages
     * @param {Array} messages - The error messages
     */
-    var showErrorMessages = function showErrorMessages(messages) {
-
+    var showErrorMessages = function showErrorMessages(messages, status = "Error") {
 
         /**
         * Create a new div to hold the error messages
         */
         const errorDiv = document.createElement('div');
-        errorDiv.classList.add('error');
+        if (status = "success") {
+            errorDiv.classList.add('success');
+        } else {
+            errorDiv.classList.add("error")
+        }
 
         // Append the error div to the user-feedback div
         userFeedbackDiv.appendChild(errorDiv);
@@ -58,10 +58,7 @@ all_forms.forEach((form) => {
         /**
         * Select the error div
         */
-        const errorDivElement = form.querySelector('.error');
-
-
-
+        const errorDivElement = form.querySelector('.error') || form.querySelector('.success');
 
         /**
         * Loop through the error messages array and create HTML elements for each message
@@ -139,6 +136,17 @@ all_forms.forEach((form) => {
         * Send the form data to the backend
         */
         var backend_response = send_to_backend(formdata, form.action);
+
+        if (typeof(backend_response) == 'object') {
+            resetUserFeedback();
+            showErrorMessages(["Mail has been send"], "success") 
+        } else {
+            resetUserFeedback(); 
+            //take all the messages out of the array of object
+            let messages = backend_response.map(item => item.messages);
+            // show the messages 
+            showErrorMessages(messages , "Error"); 
+        }
     })
 })
 

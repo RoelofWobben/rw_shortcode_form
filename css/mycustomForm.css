@@ -419,6 +419,14 @@ fieldset {
   border-radius: 20px;  
 }
 
+.success {
+  background-color: green; 
+  color:  white; 
+  padding-left: 20px; 
+  border-radius: 20px;  
+}
+
+
 .hidden {
   display: hidden; 
 }
