@@ -1,6 +1,9 @@
 <?php
-
-
+/**
+ * Handles the backend validation of a form
+ * 
+ * @package mycustomForm
+ */
 
 $path = preg_replace('/wp-content.*$/', '', __DIR__);
 require_once($path . "wp-load.php");
@@ -10,8 +13,18 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     wp_send_json_error($error); 
 }
 
+/**
+ * Data from the form submission.
+ *
+ * @var array
+ */
 $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
 
+/**
+ * Holds validation errors.
+ *
+ * @var WP_Error
+ */
 $errors = new WP_Error();
 
 if (mb_strlen($data['subject']) < 2) {
@@ -45,6 +58,5 @@ $mail_send = wp_mail(get_option( 'admin_email' ), $data['subject'],$template, $h
 if (!$mail_send) {
     wp_send_json(new WP_Error("Error", "Mail cannot be send")); 
 }
-
 
 wp_send_json(['success' => true]); 
