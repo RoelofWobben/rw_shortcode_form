@@ -1,62 +1,41 @@
 <?php
-/**
- * File handling form submission and email sending.
- * 
- * @package mycustomForm
- */
-
-$path = preg_replace('/wp-content.*$/', '', __DIR__);
-require_once($path . "wp-load.php");
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $error = new WP_Error(400, "Bad request") ; 
-    wp_send_json_error($error); 
-}
 
 /**
- * Data from the form submission.
- *
- * @var array
- */
-$data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
+ * Plugin Name: Idea Pro Contact Form Ajax
+ * Description: This form submits through an ajax call
+ **/
 
-/**
- * Holds validation errors.
- *
- * @var WP_Error
- */
-$errors = new WP_Error();
+if(!defined('ABSPATH')) die();
 
-if (mb_strlen($data['subject']) < 2) {
-    $errors->add('Error', "subject has to be more than 2 characters");
+function roelof_add_custom_shortcode()
+{
+	function roelof_contact_form($atts, $content, $shortcode_tag)
+	{
+		static $counter = 0;
+        $counter ++ ; 
+		wp_enqueue_style( 'rw-custom-form-style' );
+		wp_enqueue_script( 'rw-custom-form-script' );
+		ob_start();
+		load_template(__DIR__ . '/templates/form.php', false, [
+			'atts' => $atts,
+			'content' => $content,
+			'shortcode' => $shortcode_tag, 
+			'prefix' => $shortcode_tag . $counter,
+		]);
+		return ob_get_clean();
+	}
+
+	add_shortcode('contact_form', 'roelof_contact_form');
 }
 
-if (!is_email($data['email'])) {
-    $errors->add("Error", "Please provide a valid email");
+add_action('init', 'roelof_add_custom_shortcode');
+
+function load_assets()
+{
+
+	wp_register_style( 'rw-custom-form-style', plugins_url( '/css/mycustomForm.css', __FILE__ ), array(), '1.0.0', 'all' );
+	wp_register_script( 'rw-custom-form-script', plugins_url( '/js/myCustomForm.js', __FILE__ ), array(), '1.0.0', 'all' );
+
 }
 
-if (mb_strlen($data['message']) < 2) {
-    $errors->add('Error', "message has to be more than 2 characters");
-}
-
-if (!wp_verify_nonce($data['_wpnonce'], 'submit_contact_form')) {
-    $errors->add('Error', 'Form is messed up');
-}
-
-if ($errors->has_errors()) {
-    wp_send_json_error($errors);
-}
-
-ob_start(); 
-load_template(__DIR__ . '/templates/email.php', false, [
-   'data' => $data
-]); 
-$template = ob_get_clean(); 
-
-$headers = array('Content-Type: text/html; charset=UTF-8');
-$mail_send = wp_mail(get_option( 'admin_email' ), $data['subject'],$template, $headers, false); 
-if (!$mail_send) {
-    wp_send_json(new WP_Error("Error", "Mail cannot be sent")); 
-}
-
-wp_send_json(['success' => true]); 
+add_action('wp_enqueue_scripts', 'load_assets');

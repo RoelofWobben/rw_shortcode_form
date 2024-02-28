@@ -12,7 +12,9 @@ async function send_to_backend(data, url) {
         body: data
     })
     var data = await response.json();
-    console.log(data);
+    if (typeof(data) == 'object') {
+        
+    }
 }
 
 /**
@@ -23,6 +25,8 @@ all_forms.forEach((form) => {
     /**
     *  @type {HTMLDivElement}
     */
+
+    var userFeedbackDiv = document.querySelector('.user_feedback'); 
 
     /**
     * Function to reset user feedback
@@ -95,6 +99,7 @@ all_forms.forEach((form) => {
         */
         var subject = formdata.get("subject");
         var email = formdata.get("email");
+        var message = formdata.get('message'); 
         /**
                
         
@@ -106,12 +111,9 @@ all_forms.forEach((form) => {
             error_messages.push('Subject has to be more then 3 characters');
         }
 
-        /**
-        * Regex for email validation
-        /**
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         
         
-        */
         if (!email.match(validRegex)) {
             error_messages.push('Please input a valid email adress');
         }
