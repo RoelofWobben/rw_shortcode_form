@@ -10,8 +10,7 @@ async function send_to_backend(data, url) {
         method: 'POST',
         body: data
     })
-    var data = await response.json();
-    return data ;  
+    return response.json();  
 }
 
 /**
@@ -142,7 +141,7 @@ all_forms.forEach((form) => {
             form.reset();  
         } else {
             // take all the messages out of the array of object
-            let messages = backend_response.data.map(item => item.messages);
+            let messages = backend_response.data.map(item => item.message);
             // show the messages 
             showErrorMessages(messages , "Error"); 
         }
