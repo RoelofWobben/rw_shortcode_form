@@ -11,7 +11,7 @@ async function send_to_backend(data, url) {
         method: 'POST',
         body: data
     })
-    var data = await response.json();
+    var data = await response.json() ;
 }
 
 /**
@@ -132,12 +132,16 @@ all_forms.forEach((form) => {
             return
         }
 
+        var backend_response = []; 
+
         /**
         * Send the form data to the backend
         */
-        var backend_response = send_to_backend(formdata, form.action);
+        send_to_backend(formdata, form.action).then ((data) => backend_response = data);
 
-        if (typeof(backend_response) == 'object') {
+        console.log(backend_response); 
+
+        if (backend_response['success']) {
             resetUserFeedback();
             showErrorMessages(["Mail has been send"], "success");
             form.reset();  
