@@ -11,7 +11,7 @@ async function send_to_backend(data, url) {
         method: 'POST',
         body: data
     })
-    var data = await response.json() ;
+    var data = response.json() ;
 }
 
 /**
@@ -79,7 +79,7 @@ all_forms.forEach((form) => {
     /**
     * Event listener for form submission
     */
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         resetUserFeedback();
 
@@ -132,22 +132,18 @@ all_forms.forEach((form) => {
             return
         }
 
-        var backend_response = []; 
-
         /**
         * Send the form data to the backend
         */
-        send_to_backend(formdata, form.action).then ((data) => backend_response = data);
-
+        var backend_response = send_to_backend(formdata, form.action)
+        
         console.log(backend_response); 
 
         if (backend_response['success']) {
-            resetUserFeedback();
             showErrorMessages(["Mail has been send"], "success");
             form.reset();  
         } else {
-            resetUserFeedback(); 
-            //take all the messages out of the array of object
+            // take all the messages out of the array of object
             let messages = backend_response.map(item => item.messages);
             // show the messages 
             showErrorMessages(messages , "Error"); 
