@@ -203,17 +203,19 @@ fieldset {
 }
 
 .error {
-  background-color: rgb(254 226 226);;
-  color: rgb(153 27 27);
-  padding-left: 20px; 
-  border-radius: 20px;  
+  background-color: #fee2e2; 
+  color: #c87676; 
+  padding-left: 20px;
+  padding-top: 10px; 
+  padding-bottom: 10px;  
+  border-radius: 5px;  
 }
 
 .success {
-  background-color: green; 
-  color:  white; 
+  background-color: #ccfbf1;
+  color:  #387e78;
   padding-left: 20px; 
-  border-radius: 20px;  
+  border-radius: 5px;  
 }
 
 

@@ -46,7 +46,7 @@ all_forms.forEach((form) => {
         * Create a new div to hold the error messages
         */
         const errorDiv = document.createElement('div');
-        if (status = "success") {
+        if (status == "success") {
             errorDiv.classList.add('success');
         } else {
             errorDiv.classList.add("error")
@@ -139,7 +139,8 @@ all_forms.forEach((form) => {
 
         if (typeof(backend_response) == 'object') {
             resetUserFeedback();
-            showErrorMessages(["Mail has been send"], "success") 
+            showErrorMessages(["Mail has been send"], "success");
+            form.reset();  
         } else {
             resetUserFeedback(); 
             //take all the messages out of the array of object
