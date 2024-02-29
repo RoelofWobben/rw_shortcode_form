@@ -10,7 +10,8 @@ async function send_to_backend(data, url) {
         method: 'POST',
         body: data
     })
-    var data = response.json(); 
+    var data = await response.json();
+    return data ;  
 }
 
 /**
