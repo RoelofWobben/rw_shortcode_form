@@ -4,14 +4,13 @@ var all_forms = document.querySelectorAll('[data-shortcode="contact_form"] > for
 * Function to send form data to the backend
 * @param {FormData} data - The form data
 * @param {string} url - The backend URL
-* @returns {Promise} The response from the backend
 */
 async function send_to_backend(data, url) {
     var response = await fetch(url, {
         method: 'POST',
         body: data
     })
-    var data = response.json() ;
+    var data = response.json(); 
 }
 
 /**
@@ -135,16 +134,14 @@ all_forms.forEach((form) => {
         /**
         * Send the form data to the backend
         */
-        var backend_response = send_to_backend(formdata, form.action)
+        var backend_response = await send_to_backend(formdata, form.action); 
         
-        console.log(backend_response); 
-
         if (backend_response['success']) {
             showErrorMessages(["Mail has been send"], "success");
             form.reset();  
         } else {
             // take all the messages out of the array of object
-            let messages = backend_response.map(item => item.messages);
+            let messages = backend_response.data.map(item => item.messages);
             // show the messages 
             showErrorMessages(messages , "Error"); 
         }
