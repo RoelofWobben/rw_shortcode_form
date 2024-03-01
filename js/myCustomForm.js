@@ -82,6 +82,9 @@ all_forms.forEach((form) => {
         e.preventDefault();
         resetUserFeedback();
 
+        var button = querySelector('.button'); 
+        button.disabled = "true"; 
+
         var error_messages = [];
 
         /**
@@ -145,6 +148,8 @@ all_forms.forEach((form) => {
             // show the messages 
             showErrorMessages(messages , "Error"); 
         }
+
+        button.disabled = "false" ; 
     })
 })
 

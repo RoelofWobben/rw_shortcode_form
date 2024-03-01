@@ -25,7 +25,7 @@ $shortcode = esc_attr($args['shortcode'])
 			<label for="<?= $prefix ?>_message" class="control-label"><?php esc_html_e("Message", "mycustomForm") ?></label>
 		</div>
 		<div class="button-container">
-			<button type="submit" class="button"><span><?php esc_html_e("Submit", "mycustomForm") ?></span></button>
+			<button type="submit" class="button" disabled="false"><span><?php esc_html_e("Submit", "mycustomForm") ?></span></button>
 		</div>
 
 	</form>
