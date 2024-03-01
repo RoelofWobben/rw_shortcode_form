@@ -83,7 +83,7 @@ all_forms.forEach((form) => {
         resetUserFeedback();
 
         var button = document.querySelector('.button'); 
-        button.addAttribute('disabled');
+        button.setAttribute('disabled', "");
 
         var error_messages = [];
 
@@ -131,8 +131,11 @@ all_forms.forEach((form) => {
         if (error_messages.length) {
             showErrorMessages(error_messages);
             userFeedbackDiv.classList.remove('hidden');
+            button.removeAttribute('disabled'); 
             return
         }
+
+        
 
         /**
         * Send the form data to the backend
