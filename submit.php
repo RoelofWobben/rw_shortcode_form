@@ -60,7 +60,7 @@ $headers = array('Content-Type: text/html; charset=UTF-8');
 $mail_send = wp_mail(get_option( 'admin_email' ), $data['subject'],$template, $headers, false); 
 if (!$mail_send) {
     $errors->add('Error', "Mail cannot be send"); 
-    wp_send_json($errors); 
+    wp_send_json_error($errors); 
 }
 
 wp_send_json(['success' => true]); 

@@ -103,7 +103,28 @@ all_forms.forEach((form) => {
                
         
         
+        * Validate the subject
+        */
+        if (subject.length < 3) {
+            console.log("invalid subject");
+            error_messages.push('Subject has to be more then 3 characters');
+        }
+
+        var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         
+        
+        if (!email.match(validRegex)) {
+            error_messages.push('Please input a valid email adress');
+        }
+
+        /**
+        * Validate the message
+        */
+        if (message.length < 2) {
+
+            error_messages.push('Message has to be more then 2 characters');
+        }
+
         /**
         * If there are error messages, show them
         */
@@ -121,7 +142,7 @@ all_forms.forEach((form) => {
         */
         var backend_response = await send_to_backend(formdata, form.action); 
         
-        if (backend_response['success']) {
+        if (!backend_response['success']) {
             showErrorMessages(["Mail has been send"], "success");
             form.reset();  
         } else {
