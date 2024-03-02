@@ -8,8 +8,10 @@
 $path = preg_replace('/wp-content.*$/', '', __DIR__);
 require_once($path . "wp-load.php");
 
+$errors = new WP_Error();
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $error = new WP_Error(400, "Bad request") ; 
+    $error = $errors->add (400, "Bad request") ; 
     wp_send_json_error($error); 
 }
 
@@ -19,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
  * @var array
  */
 $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
-$errors = new WP_Error();
+
 
 /**
  * Holds validation errors.
@@ -57,7 +59,8 @@ $template = ob_get_clean();
 $headers = array('Content-Type: text/html; charset=UTF-8');
 $mail_send = wp_mail(get_option( 'admin_email' ), $data['subject'],$template, $headers, false); 
 if (!$mail_send) {
-    wp_send_json(new WP_Error("Error", "Mail cannot be send")); 
+    $errors->add('Error', "Mail cannot be send"); 
+    wp_send_json($errors); 
 }
 
 wp_send_json(['success' => true]); 
