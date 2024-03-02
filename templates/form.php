@@ -1,5 +1,5 @@
 <?php
-$atts = array_replace(["class" => "", "subject" =>  "", "email" => "", "message" => ""], $args['atts']);
+$atts = array_replace(["class" => "", "subject" =>  "", "email" => "", "message" => ""], (array) $args['atts']);
 $prefix =  esc_attr($args['prefix']);
 $shortcode = esc_attr($args['shortcode'])
 ?>

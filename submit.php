@@ -28,7 +28,7 @@ $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnon
 $errors = new WP_Error();
 
 if (mb_strlen($data['subject']) < 2) {
-    $errors->add('Error', "subject has to be more then 2 characters");
+    $errors->add('Error', "subject has to be more then 10 characters");
 }
 
 if (!is_email($data['email'])) {
