@@ -82,7 +82,7 @@ all_forms.forEach((form) => {
         e.preventDefault();
         resetUserFeedback();
 
-        var button = document.querySelector('.button'); 
+        var button = e.submitter; 
         button.setAttribute('disabled', "");
 
         var error_messages = [];
