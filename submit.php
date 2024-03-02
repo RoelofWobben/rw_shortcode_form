@@ -19,13 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
  * @var array
  */
 $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
+$errors = new WP_Error();
 
 /**
  * Holds validation errors.
  *
  * @var WP_Error
  */
-$errors = new WP_Error();
+
 
 if (mb_strlen($data['subject']) < 2) {
     $errors->add('Error', "subject has to be more then 10 characters");
