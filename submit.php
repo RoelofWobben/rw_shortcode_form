@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Handles the backend validation of a form
  * 
@@ -8,11 +9,18 @@
 $path = preg_replace('/wp-content.*$/', '', __DIR__);
 require_once($path . "wp-load.php");
 
+
+/**
+ * Holds validation errors.
+ *
+ * @var WP_Error
+ */
+
 $errors = new WP_Error();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $error = $errors->add (400, "Bad request") ; 
-    wp_send_json_error($error); 
+    $error = $errors->add(400, "Bad request");
+    wp_send_json_error($error);
 }
 
 /**
@@ -21,14 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
  * @var array
  */
 $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
-
-
-/**
- * Holds validation errors.
- *
- * @var WP_Error
- */
-
 
 if (mb_strlen($data['subject']) < 2) {
     $errors->add('Error', "subject has to be more then 10 characters");
@@ -50,17 +50,17 @@ if ($errors->has_errors()) {
     wp_send_json_error($errors);
 }
 
-ob_start(); 
+ob_start();
 load_template(__DIR__ . '/templates/email.php', false, [
-   'data' => $data
-]); 
-$template = ob_get_clean(); 
+    'data' => $data
+]);
+$template = ob_get_clean();
 
 $headers = array('Content-Type: text/html; charset=UTF-8');
-$mail_send = wp_mail(get_option( 'admin_email' ), $data['subject'],$template, $headers, false); 
+$mail_send = wp_mail(get_option('admin_email'), $data['subject'], $template, $headers, false);
 if (!$mail_send) {
-    $errors->add('Error', "Mail cannot be send"); 
-    wp_send_json_error($errors); 
+    $errors->add('Error', "Mail cannot be send");
+    wp_send_json_error($errors);
 }
 
-wp_send_json(['success' => true]); 
+wp_send_json(['success' => true]);

@@ -5,13 +5,13 @@ $shortcode = esc_attr($args['shortcode'])
 ?>
 
 <div class="<?= esc_attr($atts['class']) ?>" data-shortcode="<?= esc_attr($args['shortcode']) ?>">
-   
+
 	<form method="post" action="<?php echo plugin_dir_url(__DIR__) . 'submit.php' ?>">
-	<?php wp_nonce_field('submit_contact_form'); ?>
+		<?php wp_nonce_field('submit_contact_form'); ?>
 
-	<div class="user_feedback hidden">
+		<div class="user_feedback hidden">
 
-       </div>
+		</div>
 		<div class="form-group">
 			<input id="<?= $prefix ?>_subject" name="subject" type="text" value="<?= esc_attr($atts['subject']) ?>" />
 			<label for="<?= $prefix ?>_subject" class="control-label"><?php esc_html_e("Subject", "mycustomForm") ?></label>
@@ -21,7 +21,7 @@ $shortcode = esc_attr($args['shortcode'])
 			<label for="<?= $prefix ?>_email" class="control-label"><?php esc_html_e("Email", "mycustomForm") ?></label>
 		</div>
 		<div class="form-group">
-		    <textarea id="<?= $prefix ?>_message" name="message" ><?= esc_attr($atts['message']) ?></textarea>
+			<textarea id="<?= $prefix ?>_message" name="message"><?= esc_attr($atts['message']) ?></textarea>
 			<label for="<?= $prefix ?>_message" class="control-label"><?php esc_html_e("Message", "mycustomForm") ?></label>
 		</div>
 		<div class="button-container">
