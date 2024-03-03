@@ -48,10 +48,10 @@ all_forms.forEach((form) => {
 		* @type {HTMLDivElement}
 		*/
 		const errorDiv = document.createElement('div');
-		if (status == "success") {
+		if (status == 'success') {
 			errorDiv.classList.add('success');
 		} else {
-			errorDiv.classList.add("error")
+			errorDiv.classList.add('error')
 		}
 
 		// Append the error div to the user-feedback div

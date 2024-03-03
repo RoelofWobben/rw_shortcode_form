@@ -42,17 +42,14 @@ $data = array_replace(["class" => "", "subject" =>  "", "email" => "", "message"
                                         <p style="color:#455056; font-size:15px;line-height:24px; margin:20px;">
                                             <?php esc_html_e( "subject", "mycustomForm")  ?> : <?= esc_html($data['subject']) ?>  <br />
                                             <?php esc_html_e("email", "mycustomForm) ") ?> : <?= esc_html($data['email']) ?> <br />
-                                            <?php esc_html_e("message", "mycustomForm") ?>: <?= esc_html($data['message']) ?> <br />
+                                            <?php esc_html_e("message", "mycustomForm") ?>: <?= nl2br(esc_html($data['message'])) ?> <br />
                                         </p>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     <tr>
-                        <td style="height:20px;">&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td style="height:80px;">&nbsp;</td>
+                        <td style="height:100px;">&nbsp;</td>
                     </tr>
                 </table>
             </td>
