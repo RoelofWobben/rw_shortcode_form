@@ -232,6 +232,7 @@ button[type="submit"]:before {
   border-top-color: red;
 
   animation: spin 0.75s infinite linear;
+  display: none; 
 
   @keyframes spin {
     to {

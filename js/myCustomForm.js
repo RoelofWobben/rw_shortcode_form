@@ -84,6 +84,7 @@ all_forms.forEach((form) => {
 
 		var button = e.submitter;
 		button.setAttribute('disabled', "");
+		button.style = "display: inline-block"; 
 
 		var error_messages = [];
 
@@ -106,7 +107,6 @@ all_forms.forEach((form) => {
 		* Validate the subject
 		*/
 		if (subject.length < 3) {
-			console.log("invalid subject");
 			error_messages.push('Subject has to be more then 3 characters');
 		}
 
