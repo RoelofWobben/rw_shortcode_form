@@ -31,19 +31,19 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
 
 if (mb_strlen($data['subject']) < 2) {
-    $errors->add('Error', "subject has to be more then 10 characters");
+    $errors->add("Error", __('Subject has to be more then 10 characters', 'mycustomForm')); 
 }
 
 if (!is_email($data['email'])) {
-    $errors->add("Error", "Please provide a valid email");
+    $errors->add("Error", __("Please provide a valid email"));
 }
 
 if (mb_strlen($data['message']) < 2) {
-    $errors->add('Error', "message has to be more then 2 characters");
+    $errors->add('Error', __("message has to be more then 2 characters"));
 }
 
 if (!wp_verify_nonce($data['_wpnonce'], 'submit_contact_form')) {
-    $errors->add('Error', 'Form is messed up');
+    $errors->add('Error', __('Form is messed up'));
 }
 
 if ($errors->has_errors()) {

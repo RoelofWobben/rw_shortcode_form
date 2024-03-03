@@ -211,38 +211,33 @@ fieldset {
   outline: none;
 }
 
-button[type="submit"]:disabled {
-  background: lightblue;
-  color: black;
+button[type="submit"]{
+  background:blue;
+  color:white
 }
 
-button[type="submit"]:before {
-  content: "";
+button[type="submit"]:disabled{
+  background:lightblue;
+  color:black
+}
 
-  display: none;
-
-  width: 0.75em;
-  height: 0.75em;
-
-  margin-right: 0.25em;
-  vertical-align: -0.25em;
-
-  border: 0.25em solid white;
-  border-radius: 50%;
-  border-top-color: red;
-
-  animation: spin 0.75s infinite linear;
-  display: none; 
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
+button[type="submit"]:disabled::before{
+  content:"";
+  display:inline-block;
+  width:0.75em;
+  height:0.75em;
+  margin-right:0.25em;
+  vertical-align:-0.25em;
+  border:0.25em solid white;
+  border-radius:50%;
+  border-top-color:red;
+  animation:spin 0.75s infinite linear
+}
+@keyframes spin{
+  to{
+    transform:rotate(360deg)
   }
 }
-
-
-
 
 .error {
   background-color: #fee2e2;
