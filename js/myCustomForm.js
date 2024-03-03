@@ -84,12 +84,13 @@ all_forms.forEach((form) => {
 
 		var button = e.submitter;
 		button.setAttribute('disabled', "");
-		button.style = "display: inline-block"; 
+		
 
 		var error_messages = [];
 
 		/**
 		* Create FormData from the form
+		* @type {FormData}
 		*/
 		var formdata = new FormData(form);
 
@@ -104,7 +105,6 @@ all_forms.forEach((form) => {
 			   
 	    
 	    
-		* Validate the subject
 		*/
 		if (subject.length < 3) {
 			error_messages.push('Subject has to be more then 3 characters');
@@ -117,17 +117,12 @@ all_forms.forEach((form) => {
 			error_messages.push('Please input a valid email adress');
 		}
 
-		/**
-		* Validate the message
-		*/
+		
 		if (message.length < 2) {
 
 			error_messages.push('Message has to be more then 2 characters');
 		}
 
-		/**
-		* If there are error messages, show them
-		*/
 		if (error_messages.length) {
 			showErrorMessages(error_messages);
 			userFeedbackDiv.classList.remove('hidden');
@@ -138,7 +133,9 @@ all_forms.forEach((form) => {
 
 
 		/**
-		* Send the form data to the backend
+		* Call to the backend 
+		*  @param {FormData} formdata- The form data
+		*  @param {string} form.action - the action of the form 
 		*/
 		var backend_response = await send_to_backend(formdata, form.action);
 
