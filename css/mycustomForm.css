@@ -1,28 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
-body,
-input,
-select,
-textarea,
-body * {
-  font-family: 'Roboto', sans-serif;
-  box-sizing: border-box;
-}
-
-body::after,
-body::before,
-input::after,
-input::before,
-select::after,
-select::before,
-textarea::after,
-textarea::before,
-body *::after,
-body *::before {
-  box-sizing: border-box;
-}
-
-
 [data-shortcode="contact_form"] {
   position: relative;
   max-width: 40rem;
