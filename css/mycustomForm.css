@@ -79,6 +79,7 @@ fieldset {
 
 .form-group input,
 .form-group textarea {
+  font-family: "Roboto";
   display: block;
   background: none;
   padding: 0.125rem 0.125rem 0.0625rem;
