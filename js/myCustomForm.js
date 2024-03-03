@@ -26,6 +26,7 @@ all_forms.forEach((form) => {
 
 	/**
 	* Function to reset user feedback
+	* @return void
 	*/
 
 	var resetUserFeedback = function resetUserFeedback() {
@@ -38,11 +39,13 @@ all_forms.forEach((form) => {
 	/**
 	* Function to show error messages
 	* @param {Array} messages - The error messages
+	* @return void 
 	*/
 	var showErrorMessages = function showErrorMessages(messages, status = "Error") {
 
 		/**
-		* Create a new div to hold the error messages
+		* Create a new div to hold the error 
+		* @type {HTMLDivElement}
 		*/
 		const errorDiv = document.createElement('div');
 		if (status == "success") {
@@ -56,14 +59,14 @@ all_forms.forEach((form) => {
 
 		/**
 		* Select the error div
+		* @type {HTMLDivElement}
 		*/
 		const errorDivElement = form.querySelector('.error') || form.querySelector('.success');
 
-		/**
-		* Loop through the error messages array and create HTML elements for each message
-		*/
 		messages.forEach(message => {
-			// Create a new <p> element
+			/**
+			 * @type {HTMLDivElement}
+			 */
 			const errorParagraph = document.createElement('p');
 
 			// Set the text content of the <p> element to the current error message
@@ -85,7 +88,9 @@ all_forms.forEach((form) => {
 		var button = e.submitter;
 		button.setAttribute('disabled', "");
 		
-
+        /**
+		 * @type array<string>
+		 */ 
 		var error_messages = [];
 
 		/**
@@ -101,11 +106,7 @@ all_forms.forEach((form) => {
 		var subject = formdata.get("subject");
 		var email = formdata.get("email");
 		var message = formdata.get('message');
-		/**
-			   
-	    
-	    
-		*/
+		
 		if (subject.length < 3) {
 			error_messages.push('Subject has to be more then 3 characters');
 		}
