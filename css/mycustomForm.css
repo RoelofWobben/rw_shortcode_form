@@ -219,7 +219,7 @@ button[type="submit"]:disabled {
 button[type="submit"]:before {
   content: "";
 
-  display: inline-block;
+  display: none;
 
   width: 0.75em;
   height: 0.75em;
