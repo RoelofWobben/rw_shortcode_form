@@ -37,10 +37,13 @@ function load_assets()
 	wp_register_script('rw-custom-form-script', plugins_url('/js/myCustomForm.js', __FILE__), array(), '1.0.0', 'all');
 
 	$translation_array = array (
-		"success message" => __('Email has been send', 'mycustomForm')
+		"success_message" => __('Email has been send', 'mycustomForm'),
+		"subject_error" => __('Subject has to be more then 3 characters', 'mycustomForm'),
+		"email_error" => __('Please input a valid email adress', 'mycustomForm'),
+		"message_error" => __('Message has to be more then 2 characters', 'mycustomForm')
 	); 
 
-	wp_localize_script('rw-custom-form-script', 'success_message', $translation_array); 
+	wp_localize_script('rw-custom-form-script', 'feedback_message', $translation_array); 
 
 	wp_enqueue_script('success_message'); 
 }

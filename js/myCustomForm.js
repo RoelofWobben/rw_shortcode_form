@@ -108,20 +108,20 @@ all_forms.forEach((form) => {
 		var message = formdata.get('message');
 		
 		if (subject.length < 3) {
-			error_messages.push('Subject has to be more then 3 characters');
+			error_messages.push(feedback_message.subject_error);
 		}
 
 		var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 
 		if (!email.match(validRegex)) {
-			error_messages.push('Please input a valid email adress');
+			error_messages.push(feedback_message.email_error);
 		}
 
 		
 		if (message.length < 2) {
 
-			error_messages.push('Message has to be more then 2 characters');
+			error_messages.push(feedback_message.message_error);
 		}
 
 		if (error_messages.length) {
@@ -140,10 +140,8 @@ all_forms.forEach((form) => {
 		*/
 		var backend_response = await send_to_backend(formdata, form.action);
 
-		console.log(succes_message); 
-
 		if (backend_response['success']) {
-			showErrorMessages([success_message.succes_message], "success");
+			showErrorMessages([feedback_message.success_message], "success");
 			form.reset();
 		} else {
 			// take all the messages out of the array of object
