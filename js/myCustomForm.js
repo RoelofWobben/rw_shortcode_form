@@ -11,7 +11,7 @@
 
 
 /**
- * @type NodeListOf<HTMLFormElement>
+ * @type {NodeListOf<HTMLFormElement>}
  */
 var all_forms = document.querySelectorAll('[data-shortcode="contact_form"] > form');
 
@@ -114,7 +114,7 @@ all_forms.forEach((form) => {
 		button.setAttribute('disabled', "");
 
 		/**
-		 * @type array<string>
+		 * @type {Array.<String>}
 		 */
 		var error_messages = [];
 
