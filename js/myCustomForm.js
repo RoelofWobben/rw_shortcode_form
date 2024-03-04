@@ -140,6 +140,8 @@ all_forms.forEach((form) => {
 		*/
 		var backend_response = await send_to_backend(formdata, form.action);
 
+		console.log(succes_message); 
+
 		if (backend_response['success']) {
 			showErrorMessages([success_message.succes_message], "success");
 			form.reset();

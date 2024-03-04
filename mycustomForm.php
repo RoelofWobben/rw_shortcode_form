@@ -40,7 +40,7 @@ function load_assets()
 		"success message" => __('Email has been send', 'mycustomForm')
 	); 
 
-	wp_localize_script('success_message', 'success_message', $translation_array); 
+	wp_localize_script('rw-custom-form-script', 'success_message', $translation_array); 
 
 	wp_enqueue_script('success_message'); 
 }
