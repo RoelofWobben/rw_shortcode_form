@@ -15,7 +15,7 @@ async function send_to_backend(data, url) {
 
 /**
 * Loop through all forms on the page
-* @params {HTMLFormElement}  form
+* @param {HTMLFormElement}  form
 */
 all_forms.forEach((form) => {
 
@@ -27,7 +27,7 @@ all_forms.forEach((form) => {
 
 	/**
 	* Function to reset user feedback
-	* @return void
+	* @return {void}
 	*/
 
 	var resetUserFeedback = function resetUserFeedback() {
@@ -40,8 +40,8 @@ all_forms.forEach((form) => {
 	/**
 	* Function to show messages
 	* @param {Array} messages - The error messages
-	* @params {string} type - the type of Error messages
-	* @return void 
+	* @param {string} type - the type of Error messages
+	* @return {void} 
 	*/
 	var showMessages = function showMessages(messages, type = "error") {
 
@@ -50,7 +50,7 @@ all_forms.forEach((form) => {
 		* @type {HTMLDivElement}
 		*/
 		const errorDiv = document.createElement('div');
-		
+
 		errorDiv.classList.add(type);
 
 		messages.forEach(message => {
@@ -59,10 +59,8 @@ all_forms.forEach((form) => {
 			 */
 			const errorParagraph = document.createElement('p');
 
-			// Set the text content of the <p> element to the current error message
 			errorParagraph.textContent = message;
 
-			// Append the <p> element to the error div
 			errorDiv.appendChild(errorParagraph);
 		});
 		userFeedbackDiv.appendChild(errorDiv);
@@ -72,7 +70,7 @@ all_forms.forEach((form) => {
 
 	/**
 	* Event listener for form submission
-	* @params {SubmitEvent} e  
+	* @param {SubmitEvent} e  
 	*/
 
 	form.addEventListener('submit', async (e) => {
@@ -81,10 +79,10 @@ all_forms.forEach((form) => {
 
 		var button = e.submitter;
 		button.setAttribute('disabled', "");
-		
+
 		/**
 		 * @type array<string>
-		 */ 
+		 */
 		var error_messages = [];
 
 		/**
@@ -100,7 +98,7 @@ all_forms.forEach((form) => {
 		var subject = formdata.get("subject");
 		var email = formdata.get("email");
 		var message = formdata.get('message');
-		
+
 		if (subject.length < 3) {
 			error_messages.push(feedback_message.subject_error);
 		}
@@ -112,7 +110,7 @@ all_forms.forEach((form) => {
 			error_messages.push(feedback_message.email_error);
 		}
 
-		
+
 		if (message.length < 2) {
 
 			error_messages.push(feedback_message.message_error);
@@ -125,8 +123,6 @@ all_forms.forEach((form) => {
 			return
 		}
 
-
-
 		/**
 		* Call to the backend 
 		*  @param {FormData} formdata- The form data
@@ -138,9 +134,7 @@ all_forms.forEach((form) => {
 			showMessages([feedback_message.success_message], "success");
 			form.reset();
 		} else {
-			// take all the messages out of the array of object
 			let messages = backend_response.data.map(item => item.message);
-			// show the messages 
 			showMessages(messages, "Error");
 		}
 
