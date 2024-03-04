@@ -52,11 +52,9 @@ all_forms.forEach((form) => {
 		
 		errorDiv.classList.add(type);
 
-		// Append the error div to the user-feedback div
-
 		messages.forEach(message => {
 			/**
-			 * @type {HTMLDivElement}
+			 * @type {HTMLParagraphElement}
 			 */
 			const errorParagraph = document.createElement('p');
 
