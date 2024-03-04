@@ -37,7 +37,7 @@ all_forms.forEach((form) => {
 	};
 
 	/**
-	* Function to show error messages
+	* Function to show messages
 	* @param {Array} messages - The error messages
 	* @params {string} type - the type of Error messages
 	* @return void 
@@ -53,7 +53,6 @@ all_forms.forEach((form) => {
 		errorDiv.classList.add(type);
 
 		// Append the error div to the user-feedback div
-		userFeedbackDiv.appendChild(errorDiv);
 
 		messages.forEach(message => {
 			/**
@@ -65,8 +64,10 @@ all_forms.forEach((form) => {
 			errorParagraph.textContent = message;
 
 			// Append the <p> element to the error div
+			errorDiv.appendChild(errorParagraph);
 		});
-		errorDiv.appendChild(errorParagraph);
+		userFeedbackDiv.appendChild(errorDiv);
+
 	};
 
 
