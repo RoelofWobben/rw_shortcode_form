@@ -15,6 +15,7 @@ async function send_to_backend(data, url) {
 
 /**
 * Loop through all forms on the page
+* @params {HTMLFormElement}  form
 */
 all_forms.forEach((form) => {
 
@@ -71,7 +72,9 @@ all_forms.forEach((form) => {
 
 	/**
 	* Event listener for form submission
+	* @params {SubmitEvent} e  
 	*/
+
 	form.addEventListener('submit', async (e) => {
 		e.preventDefault();
 		resetUserFeedback();
