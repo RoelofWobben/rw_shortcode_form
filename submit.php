@@ -28,22 +28,31 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
  *
  * @var array
  */
+
 $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
+
+foreach (array_keys($data) as $key) {
+    if(empty($_POST[$key]) || !is_string($_POST[$key])) {
+        continue;
+    }
+    
+    $data[$key] = trim($_POST[$key]);
+}
 
 if (mb_strlen($data['subject']) < 2) {
     $errors->add("Error", __('Subject has to be more then 10 characters', 'mycustomForm')); 
 }
 
 if (!is_email($data['email'])) {
-    $errors->add("Error", __("Please provide a valid email"));
+    $errors->add("Error", __("Please provide a valid email"), 'mycustomForm');
 }
 
 if (mb_strlen($data['message']) < 2) {
-    $errors->add('Error', __("message has to be more then 2 characters"));
+    $errors->add('Error', __("message has to be more then 2 characters",'mycustomForm'));
 }
 
 if (!wp_verify_nonce($data['_wpnonce'], 'submit_contact_form')) {
-    $errors->add('Error', __('Form is messed up'));
+    $errors->add('Error', __('Form is messed up'), "mycustomForm");
 }
 
 if ($errors->has_errors()) {
@@ -59,7 +68,7 @@ $template = ob_get_clean();
 $headers = array('Content-Type: text/html; charset=UTF-8');
 $mail_send = wp_mail(get_option('admin_email'), $data['subject'], $template, $headers, false);
 if (!$mail_send) {
-    $errors->add('Error', "Mail cannot be send");
+    $errors->add('Error', __("Mail cannot be send", "mycustomForm"));
     wp_send_json_error($errors);
 }
 

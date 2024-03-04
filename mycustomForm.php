@@ -35,6 +35,14 @@ function load_assets()
 
 	wp_register_style('rw-custom-form-style', plugins_url('/css/mycustomForm.css', __FILE__), array(), '1.0.0', 'all');
 	wp_register_script('rw-custom-form-script', plugins_url('/js/myCustomForm.js', __FILE__), array(), '1.0.0', 'all');
+
+	$translation_array = array (
+		"success message" => __('Email has been send', 'mycustomForm')
+	); 
+
+	wp_localize_script('success_message', 'success_message', $translation_array); 
+
+	wp_enqueue_script('success_message'); 
 }
 
 add_action('wp_enqueue_scripts', 'load_assets');

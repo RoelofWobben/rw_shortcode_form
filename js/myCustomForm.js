@@ -141,7 +141,7 @@ all_forms.forEach((form) => {
 		var backend_response = await send_to_backend(formdata, form.action);
 
 		if (backend_response['success']) {
-			showErrorMessages(["Mail has been send"], "success");
+			showErrorMessages([success_message.succes_message], "success");
 			form.reset();
 		} else {
 			// take all the messages out of the array of object
