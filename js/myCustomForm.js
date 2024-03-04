@@ -39,29 +39,21 @@ all_forms.forEach((form) => {
 	/**
 	* Function to show error messages
 	* @param {Array} messages - The error messages
+	* @params {string} type - the type of Error messages
 	* @return void 
 	*/
-	var showErrorMessages = function showErrorMessages(messages, status = "Error") {
+	var showMessages = function showMessages(messages, type = "error") {
 
 		/**
 		* Create a new div to hold the error 
 		* @type {HTMLDivElement}
 		*/
 		const errorDiv = document.createElement('div');
-		if (status == 'success') {
-			errorDiv.classList.add('success');
-		} else {
-			errorDiv.classList.add('error')
-		}
+		
+		errorDiv.classList.add(type);
 
 		// Append the error div to the user-feedback div
 		userFeedbackDiv.appendChild(errorDiv);
-
-		/**
-		* Select the error div
-		* @type {HTMLDivElement}
-		*/
-		const errorDivElement = form.querySelector('.error') || form.querySelector('.success');
 
 		messages.forEach(message => {
 			/**
@@ -73,8 +65,8 @@ all_forms.forEach((form) => {
 			errorParagraph.textContent = message;
 
 			// Append the <p> element to the error div
-			errorDivElement.appendChild(errorParagraph);
 		});
+		errorDiv.appendChild(errorParagraph);
 	};
 
 
@@ -88,7 +80,7 @@ all_forms.forEach((form) => {
 		var button = e.submitter;
 		button.setAttribute('disabled', "");
 		
-        /**
+		/**
 		 * @type array<string>
 		 */ 
 		var error_messages = [];
@@ -125,7 +117,7 @@ all_forms.forEach((form) => {
 		}
 
 		if (error_messages.length) {
-			showErrorMessages(error_messages);
+			showMessages(error_messages);
 			userFeedbackDiv.classList.remove('hidden');
 			button.removeAttribute('disabled');
 			return
@@ -141,13 +133,13 @@ all_forms.forEach((form) => {
 		var backend_response = await send_to_backend(formdata, form.action);
 
 		if (backend_response['success']) {
-			showErrorMessages([feedback_message.success_message], "success");
+			showMessages([feedback_message.success_message], "success");
 			form.reset();
 		} else {
 			// take all the messages out of the array of object
 			let messages = backend_response.data.map(item => item.message);
 			// show the messages 
-			showErrorMessages(messages, "Error");
+			showMessages(messages, "Error");
 		}
 
 		button.removeAttribute('disabled');
