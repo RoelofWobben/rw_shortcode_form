@@ -40,19 +40,19 @@ foreach (array_keys($data) as $key) {
 }
 
 if (mb_strlen($data['subject']) < 2) {
-    $errors->add("Error", __('Subject has to be more then 10 characters', 'mycustomForm')); 
+    $errors->add("validation", __('Subject has to be more then 10 characters', 'mycustomForm')); 
 }
 
 if (!is_email($data['email'])) {
-    $errors->add("Error", __("Please provide a valid email"), 'mycustomForm');
+    $errors->add("validation", __("Please provide a valid email"), 'mycustomForm');
 }
 
 if (mb_strlen($data['message']) < 2) {
-    $errors->add('Error', __("message has to be more then 2 characters",'mycustomForm'));
+    $errors->add('validation', __("message has to be more then 2 characters",'mycustomForm'));
 }
 
 if (!wp_verify_nonce($data['_wpnonce'], 'submit_contact_form')) {
-    $errors->add('Error', __('Form is messed up'), "mycustomForm");
+    $errors->add('validation', __('Form is messed up'), "mycustomForm");
 }
 
 if ($errors->has_errors()) {
