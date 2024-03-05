@@ -68,7 +68,7 @@ $template = ob_get_clean();
 $headers = array('Content-Type: text/html; charset=UTF-8');
 $mail_send = wp_mail(get_option('admin_email'), $data['subject'], $template, $headers, false);
 if (!$mail_send) {
-    $errors->add('Error', __("Mail cannot be send", "mycustomForm"));
+    $errors->add('validation', __("Mail cannot be send", "mycustomForm"));
     wp_send_json_error($errors);
 }
 
