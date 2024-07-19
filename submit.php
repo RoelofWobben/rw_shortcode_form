@@ -29,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
  * @var array
  */
 
+ if (!wp_verify_nonce($data['_wpnonce'], 'submit_contact_form')) {
+    $errors->add('validation', __('Form is messed up'), "mycustomForm");
+}
+
 $data = array_replace(["subject" =>  "", "email" => "", "message" => "", "_wpnonce" => ""], (array) $_POST);
 
 foreach (array_keys($data) as $key) {
@@ -51,9 +55,7 @@ if (mb_strlen($data['message']) < 2) {
     $errors->add('validation', __("message has to be more then 2 characters",'mycustomForm'));
 }
 
-if (!wp_verify_nonce($data['_wpnonce'], 'submit_contact_form')) {
-    $errors->add('validation', __('Form is messed up'), "mycustomForm");
-}
+
 
 if ($errors->has_errors()) {
     wp_send_json_error($errors);
